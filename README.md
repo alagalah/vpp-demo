@@ -27,4 +27,7 @@ It walks a user through
 - Routes due to directly connected routes inserted into default FIB
 
 ## demo2 - bridging
+- Creates two network namespaces c1, c2
+- Adds interfaces to VPP and add them to bridge-domain 1
+- MAC addresses are automatically learned
 
