@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+vagrant ssh -c "/vagrant/vmrun /vagrant/${1}"

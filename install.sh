@@ -9,5 +9,5 @@ fi
 
 echo "deb https://nexus.fd.io/content/repositories/fd.io.master.ubuntu.trusty.main/ ./" | sudo tee -a /etc/apt/sources.list.d/99fd.io.list
 apt-get -qq update
-apt-get -qq install -y --force-yes vpp vpp-dpdk-dkms
+apt-get -qq install -y --force-yes vpp vpp-dpdk-dkms bridge-utils
 service vpp start

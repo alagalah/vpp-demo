@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+if [ $USER != "root" ] ; then
+    #echo "Restarting script with sudo..."
+    sudo $0 ${*}
+    exit
+fi
+
+if [ -z "$1" ]; then
+    echo "You must specify a demo name"
+    exit 0;
+fi
+
+if [ -f "$1" ]; then
+    DEMO=$1
+else
+    echo "This is not a valid filename"
+    exit 0;
+fi
+
+source $DEMO
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+function pause {
+    echo ""; echo ""
+    read -n1 -r -p "Press space to continue..." key
+    printf "\033c"
+}
+
+function instruction {
+
+    eval INSTR="$1"
+    eval CMD="$2"
+    echo ""
+    echo -e "${RED}********************************************************************************${NC} \n"
+    echo -e "${RED} ${INSTR} ${NC}"
+    echo -e "${GREEN} ${CMD} ${NC} \n"
+    echo -e "${RED}********************************************************************************${NC} \n"
+}
+
+#Clear and set netns and veths
+/vagrant/netns.sh $C1_IP $C1_GW $C2_IP $C2_GW
+
+#Clear the screen
+printf "\033c"
+
+if [ -e $DEMO.cmd ]; then
+    rm $DEMO.cmd
+fi
+
+#Loop through instructions and commands from filename input as $1
+for ((i=0;i<${#INSTR[@]};++i)); do
+    instruction "\${INSTR[i]}" "\${CMD[i]}"
+    eval "${CMD[i]}"
+    echo -e "${CMD[i]}" >> $DEMO.cmd
+    pause
+done
+
+
+exit 0
+
+

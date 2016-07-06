@@ -6,6 +6,11 @@ if [ $USER != "root" ] ; then
     exit
 fi
 
+C1_IP=$1
+C1_GW=$2
+C2_IP=$3
+C2_GW=$4
+
 # Restart VPP so there is no config
 service vpp restart
 
@@ -27,8 +32,8 @@ ip link set dev veth_link1 up netns c1
 ip netns exec c1 \
      bash -c "
     ip link set dev lo up
-    ip addr add 172.16.1.2/24 dev veth_link1
-    ip route add 172.16.2.0/24 via 172.16.1.1
+    ip addr add ${C1_IP} dev veth_link1
+    ip route add default via ${C1_GW} dev veth_link1
 "
 
 # create and configure 2nd veth pair
@@ -39,6 +44,6 @@ ip link set dev veth_link2 up netns c2
 ip netns exec c2 \
      bash -c "
     ip link set dev lo up
-    ip addr add 172.16.2.2/24 dev veth_link2
-    ip route add 172.16.1.0/24 via 172.16.2.1
+    ip addr add ${C2_IP} dev veth_link2
+    ip route add default via ${C2_GW} dev veth_link2
 "
