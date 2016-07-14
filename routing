@@ -7,7 +7,7 @@ C2_GW="172.16.2.1"
 
 INSTR=()
 CMD=()
-INSTR+=("Welcome to demo1. This will show you some simple commands to connect two
+INSTR+=("Welcome to the routing demo. This will show you some simple commands to connect two
 linux netnamespaces to VPP and ping between them.")
 CMD+=("")
 
@@ -41,5 +41,5 @@ CMD+=("sudo ip netns exec c1 ping -c3 172.16.2.2")
 INSTR+=("")
 CMD+=("sudo ip netns exec c2 ping -c3 172.16.1.2")
 
-INSTR+=("Thanks for doing demo1. To restart this demo and type these commands yourself \nvagrant ssh \nsudo /vagrant/netns.sh \ncat /vagrant/demo1.cmd")
+INSTR+=("Thanks for doing the routing demo. To restart this demo and type these commands yourself \nvagrant ssh \nsudo /vagrant/netns.sh \ncat /vagrant/routing.cmd")
 CMD+=("")
