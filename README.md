@@ -2,3 +2,5 @@
 
 https://gerrit.fd.io/r/#/admin/projects/vppsb
 
+vpp-userdemo
+
